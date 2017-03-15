@@ -1,4 +1,0 @@
-Snooker table
-=====
-
-Snooker table

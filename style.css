@@ -92,7 +92,7 @@ h1 {
 	background: #000 none repeat scroll 0 0;
 	color: #fff;
 	margin: 0 auto;
-	width: 45%;
+	width: 50%;
 	padding: 4px 5px;
 }
 .clogged-balls {
@@ -152,9 +152,9 @@ h1 {
 	top: 5px;
 }*/
 .result {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	display: block; /*flex*/
+	/*flex-direction: row;
+	justify-content: space-between;*/
 	position: relative;
 }
 .result-frame {
@@ -162,28 +162,28 @@ h1 {
 	color: #000;
 	padding: 0 5px;
 	margin: 0 5px;
-	width: 25px
+	width: 25px;
+	float: right;
 }
 .player-left .result-frame {
-	float: right;
-	text-align: right;
+	/*float: right;*/
+	text-align: center;
 }
 .player-right .result-frame {
-	float: left;
+	/*float: left;*/
+	text-align: center;
+}
+.player-block/*.player-left*/ {
+	width: 100%; /*50%*/
 	text-align: left;
+	position: relative;
 }
-.player-block {
-	width: 50%;
-}
-.player-block.player-left {
-	text-align: left;
-}
-.player-block.player-right {
+/*.player-block.player-right {
 	text-align: right;
-}
+}*/
 .player{
 	margin: 0 20px;
-	width: 90px;
+	width: 60%; /*90px*/
 }
 .active .player{
 	color: #ffe835;
@@ -195,25 +195,25 @@ h1 {
 	position: absolute;
 	width: 10px;
 	border: 9px solid transparent;
-	top: 10px;
+	top: 6px; /*10px*/
 }
-.player-block.active .first-player:before {
+.player-block.active:before {
 	left: 3px;
 	border-left-color: #FFE835;
 	border-right: 0;
 }
-.player-block.active .second-player:before {
+/*.player-block.active .second-player:before {
 	right: 3px;
-	/*transform: rotate(180deg);*/
+	transform: rotate(180deg);
 	border-right-color: #FFE835;
 	border-left: 0;
-}
+}*/
 .player-points {
 	background: #000;
 	color: #fff;
 	padding: 5px 0;
-	display: flex;
-	flex-direction: row;
+	display: block; /flex
+	/*flex-direction: row;*/
 }
 .player-points span{
 	display: inline-block;
@@ -221,18 +221,19 @@ h1 {
 	/*text-overflow: ellipsis;*/
 	white-space: nowrap;
 }
-.player-left .player-points{
-	margin: 5px 5px 5px 0;
+.player-points{
+	margin: 5px 0 5px 0; /*5px 5px 5px 0*/
 }
-.player-right .player-points{
+/*.player-right .player-points{
 	margin: 5px 0 5px 5px;
-}
+}*/
 .result-points {
 	background: #ffe835 none repeat scroll 0 0;
 	color: #000;
 	display: inline-block;
 	text-align: center;
 	width: 30px;
+	float: right;
 }
 .breakNFoul{
 	display: none;
@@ -242,9 +243,9 @@ h1 {
 .player-block.active .breakNFoul{
 	display: flex;
 }
-.player-block.player-left.active .breakNFoul{
+/*.player-block.player-left.active .breakNFoul{
 	flex-direction: row-reverse;
-}
+}*/
 .breakNFoul button{
 	width: 65px;
 	height: auto;
@@ -401,7 +402,7 @@ h1 {
 	background: #000 none repeat scroll 0 0;
 	color: #fff;
 	margin: 0 auto 10px;
-	width: 40%;
+	width: 45%;
 	padding: 5px;
 }
 /*.balls li .shadow {
@@ -420,4 +421,31 @@ h1 {
 	.container{
 		width: 100%;
 	}
+	.balls li {
+		height: 85px; /*50px*/
+		width: 85px; /*50px*/
+	}
+	.balls li span{
+		top: 45px;
+	}
 }
+@media screen and (max-width: 380px){
+	.balls li {
+		height: 75px;
+		width: 75px;
+	}
+	.balls li span{
+		top: 35px;
+	}
+}
+/*@media screen and (max-width: 380px){
+	.result{
+		display: block;
+	}
+	.player-block{
+		width: 100%;
+	}
+	.player-right .player-points{
+		margin: 5px 0 5px 0px;
+	}
+}*/

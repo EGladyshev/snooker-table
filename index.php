@@ -29,48 +29,50 @@
 				</div>
 				<div class="table">
 					<div class="remain">Очков на столе: <span>147</span></div>
-					<div class="left-clogged-ball">
-						<ul class="clogged-balls">
-							<li class="clogged-red"><span>12</span></li>
-							<li class="clogged-yellow"><span>1</span></li>
-							<li class="clogged-green"><span>1</span></li>
-							<li class="clogged-brown"><span>1</span></li>
-							<li class="clogged-blue"><span>1</span></li>
-							<li class="clogged-rose"><span>1</span></li>
-							<li class="clogged-black"><span>1</span></li>
-						</ul>
-					</div>
-					<div class="right-clogged-ball">
-						<ul class="clogged-balls">
-							<li class="clogged-red"><span>12</span></li>
-							<li class="clogged-yellow"><span>1</span></li>
-							<li class="clogged-green"><span>1</span></li>
-							<li class="clogged-brown"><span>1</span></li>
-							<li class="clogged-blue"><span>1</span></li>
-							<li class="clogged-rose"><span>1</span></li>
-							<li class="clogged-black"><span>1</span></li>
-						</ul>
-					</div>
+
+
 					<div class="result">
 						<div class="player-block player-left active">
 							<div class="player-points">
 								<span class="player first-player ">Игрок 1</span>
-								<span class="result-points">0</span>
 								<span class="result-frame">0</span>
+								<span class="result-points">0</span>
 							</div>
 							<div class="breakNFoul">
 								<span class="break">Break: <em>0</em></span>
+								<div class="left-clogged-ball">
+									<ul class="clogged-balls">
+										<li class="clogged-red"><span>12</span></li>
+										<li class="clogged-yellow"><span>1</span></li>
+										<li class="clogged-green"><span>1</span></li>
+										<li class="clogged-brown"><span>1</span></li>
+										<li class="clogged-blue"><span>1</span></li>
+										<li class="clogged-rose"><span>1</span></li>
+										<li class="clogged-black"><span>1</span></li>
+									</ul>
+								</div>
 								<button>Фол</button>
 							</div>
 						</div>
 						<div class="player-block player-right">
 							<div class="player-points">
+								<span class="player second-player">Игрок 2</span>
 								<span class="result-frame">0</span>
 								<span class="result-points">0</span>
-								<span class="player second-player">Игрок 2</span>
 							</div>
 							<div class="breakNFoul">
 								<span class="break">Break: <em>0</em></span>
+								<div class="right-clogged-ball">
+									<ul class="clogged-balls">
+										<li class="clogged-red"><span>12</span></li>
+										<li class="clogged-yellow"><span>1</span></li>
+										<li class="clogged-green"><span>1</span></li>
+										<li class="clogged-brown"><span>1</span></li>
+										<li class="clogged-blue"><span>1</span></li>
+										<li class="clogged-rose"><span>1</span></li>
+										<li class="clogged-black"><span>1</span></li>
+									</ul>
+								</div>
 								<button>Фол</button>
 							</div>
 						</div>
