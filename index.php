@@ -124,10 +124,10 @@
 		<div class="popup-box">
 			<strong>Сколько очков фол?</strong>
 			<form action="" method="post">
-				<input type="radio" value="4">
-				<input type="radio" value="5">
-				<input type="radio" value="6">
-				<input type="radio" value="7">
+				<label class="active" for="foul4points"><input id="foul4points" name="foul" type="radio" value="4" checked>4 очка</label>
+				<label for="foul5points"><input id="foul5points" name="foul" type="radio" value="5">5 очка</label>
+				<label for="foul6points"><input id="foul6points" name="foul" type="radio" value="6">6 очка</label>
+				<label for="foul7points"><input id="foul7points" name="foul" type="radio" value="7">7 очка</label>
 				<input type="submit" value="Выбрать">
 			</form>
 		</div>

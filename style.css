@@ -60,7 +60,7 @@ fieldset {
 	background: rgba(0, 0, 0, 0) url("images/horecaplan-snooker-pocket-bewerkt.jpg") no-repeat fixed 0 0;
 	box-shadow: 0 0 60px #fff inset;
 }
-.container button, .container input[type=submit] {
+.container button, #pop-foul-points form input[type=submit] {
 	background: #ffe835 none repeat scroll 0 0;
 	border: medium none;
 	/*border-radius: 20px;*/
@@ -76,7 +76,7 @@ fieldset {
 	margin-top: 10px;
 }
 /*.container button:hover,*/
-.container button:active, .container input[type=submit]:active {
+.container button:active, #pop-foul-points form input[type=submit]:active {
 	background: #000;
 	color: #ffe835;
 }
@@ -196,14 +196,18 @@ h1 {
 	width: 10px;
 	border: 9px solid transparent;
 	top: 6px; /*10px*/
+	left: 3px;
+	transform: rotate(180deg);
+	border-right-color: #FFE835;
+	border-left: 0;
 }
-.player-block.active:before {
+/*.player-block.active:before {
 	left: 3px;
 	border-left-color: #FFE835;
 	border-right: 0;
-}
-/*.player-block.active .second-player:before {
-	right: 3px;
+}*/
+/*.player-block.active .player:before {
+	left: 3px;
 	transform: rotate(180deg);
 	border-right-color: #FFE835;
 	border-left: 0;
@@ -212,7 +216,7 @@ h1 {
 	background: #000;
 	color: #fff;
 	padding: 5px 0;
-	display: block; /flex
+	display: block; /*flex*/
 	/*flex-direction: row;*/
 }
 .player-points span{
@@ -417,6 +421,31 @@ h1 {
 	transform: rotateX(90deg) translateZ(-150px);
 	z-index: -1;
 }*/
+body .mfp-content{
+	max-width: 300px;
+	left: -8px;
+	/*width: 100%;*/
+}
+#pop-foul-points form label {
+	display: inline-block;
+	width: 40%;
+	height: 30px;
+	/*text-align: center;*/
+	margin-top: 7px;
+}
+#pop-foul-points form label.active {
+	color:#d60b0f;
+}
+#pop-foul-points form input[type=radio]{
+	display: none;
+}
+#pop-foul-points form input[type=submit]{
+	width: 200px;
+	margin: 0 auto;
+}
+#pop-foul-points{
+	text-align: center;
+}
 @media screen and (max-width: 400px){
 	.container{
 		width: 100%;

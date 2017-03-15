@@ -1,6 +1,7 @@
 // идеи
 // время удара, время фрейма
 // вынести просчет очков на столе в отдельную функцию
+// !!! по зачету и просчету очков настоле осталось, когда на столе лищь цветные, прописать!
 $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
@@ -10,6 +11,8 @@ $(document).ready(function(){
 		.on("click", ".reset", resetFrame)
 		.on("click", ".next-frame", nextFrame)
 		.on("click", ".breakNFoul button", getPopupFoul)
+		.on("click", "#pop-foul-points form label", chooseFoulPoints)
+		.on("submit", "#pop-foul-points form", getFoulPoints)
 	;
 });
 function nextPlayer(){
@@ -20,23 +23,44 @@ function nextPlayer(){
 }
 function getPoints(){
 	var $this = $(this),
-		points = $this.data("point"),
-		curPoint = $(".player-block.active .result-points").text(),
-		Break = $(".player-block.active .breakNFoul .break em").text(),
-		countBall = $this.find(".count-ball").text(),
+		points = parseInt($this.data("point")),
+		curPoint = parseInt($(".player-block.active .result-points").text()),
+		Break = parseInt($(".player-block.active .breakNFoul .break em").text()),
+		countBall = parseInt($this.find(".count-ball").text()),
 		countRed = parseInt($(".balls li.red-ball .count-ball").text()),
 		newCount = 0,
 		remain = 0,
 		counRed = 0, counYellow = 0, counGreen = 0, counBrown = 0,
 		counBlue = 0, counRose = 0, counBlack = 0
 	;
-	$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
-	$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
-	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0 ){
+	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 0){
+		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
+		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		countRed = parseInt(countBall) - 1;
 		$this.find(".count-ball").text(countRed);
-		//if(newCount == 0)
+		localStorage["lastRed"] = 1;
+	}else if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 1){
+		console.log($this);
+		localStorage["lastRed"] = 1;
+		//return false;
+	}else if(!$this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 1 && !$this.hasClass("free-ball")){
+		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
+		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
+		localStorage["lastRed"] = 0;
+		//return false;
+	} else if(countRed == 0 && localStorage["lastRed"] == 0 && !$this.hasClass("free-ball") && countBall > 0){
+		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
+		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
+		countCurBall = parseInt(countBall) - 1;
+		$this.find(".count-ball").text(countCurBall);
+	} else if(Break == 0 && $this.hasClass("free-ball")){
+		console.log(Break);
+		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
+		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
+		if(countRed > 0)
 			localStorage["lastRed"] = 1;
+		else
+			localStorage["lastRed"] = 0;
 	} else {
 		localStorage["lastRed"] = 0;
 	}
@@ -45,8 +69,8 @@ function getPoints(){
 	$(".remain span").text(remain);
 
 	//else if($this.has)
-	//1. когда забивается последний красный попробовать записать в локал сторэдж этот момент и после цветного обнулять!
-	//2. Подсчитать очки на столе
+	//1. когда забивается красный попробовать записать в локал сторэдж этот момент и после цветного обнулять!
+	//2. Подсчитать очки на столе(осталось на цветных)
 	//3. Показать забитые шары игрока
 	//return false;
 }
@@ -125,4 +149,17 @@ function getPopupFoul(){
 		mainClass: 'mfp-fade'
 	});
 	return false
+}
+function chooseFoulPoints(){
+	$(this).addClass("active").siblings().removeClass("active");
+}
+function getFoulPoints(){
+	var $this = $(this),
+		foulPoints = parseInt($this.find("input[type=radio]:checked").val()),
+		opponent = $(".player-block.active").siblings().find(".result-points"),
+		curPoints = parseInt(opponent.text())
+	;
+	opponent.text(curPoints + foulPoints);
+	$.magnificPopup.close();
+	return false;
 }
