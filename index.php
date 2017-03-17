@@ -20,12 +20,12 @@
 			<div class="container">
 				<h1>Снукер web-табло</h1>
 				<div class="top-button">
-					<button class="new-game">Новая игра</button>
+					<button class="new-game" title="кнопка в разработке">Новая игра</button>
 					<button class="next-frame">Следующий фрейм</button>
 				</div>
 				<div class="top-button">
 					<button class="reset">Сброс</button>
-					<button class="cancel-action">Отменить действие</button>
+					<button class="cancel-action" title="кнопка в разработке">Отменить действие</button>
 				</div>
 				<div class="table">
 					<div class="remain">Очков на столе: <span>147</span></div>

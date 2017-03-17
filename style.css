@@ -72,6 +72,9 @@ fieldset {
 	cursor: pointer;
 	text-transform: uppercase;
 }
+.cancel-action, .new-game { /*временно*/
+	opacity: 0.5;
+}
 .top-button{
 	margin-top: 10px;
 }

@@ -1,7 +1,8 @@
 // идеи
 // время удара, время фрейма
-// вынести просчет очков на столе в отдельную функцию
-// !!! по зачету и просчету очков настоле осталось, когда на столе лищь цветные, прописать!
+//+++ вынести просчет очков на столе в отдельную функцию
+// Подсказка
+//+++ !!! по зачету и просчету очков настоле осталось, когда на столе лищь цветные, прописать!
 $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
@@ -31,46 +32,52 @@ function getPoints(){
 		newCount = 0,
 		remain = 0,
 		counRed = 0, counYellow = 0, counGreen = 0, counBrown = 0,
-		counBlue = 0, counRose = 0, counBlack = 0
+		counBlue = 0, counRose = 0, counBlack = 0,
+		remainCalc = true;
 	;
-	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 0){
+	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 0){ // Просчет красных
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		countRed = parseInt(countBall) - 1;
 		$this.find(".count-ball").text(countRed);
 		localStorage["lastRed"] = 1;
-	}else if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 1){
-		console.log($this);
+	}/* else if($this.hasClass("free-ball") && localStorage["lastRed"] == 1){ // Запрет свободного шара после красного
+		remainCalc = false;
+	} else if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) == 0 && localStorage["lastRed"] == 1){ // Запрет красного шара после красного
+		remainCalc = false;
+	}*/ else if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 1){
 		localStorage["lastRed"] = 1;
 		//return false;
-	}else if(!$this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 1 && !$this.hasClass("free-ball")){
+	}else if(!$this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0  && localStorage["lastRed"] == 1 && !$this.hasClass("free-ball")){ // Просчет цветных шаров после забития красных
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		localStorage["lastRed"] = 0;
 		//return false;
-	} else if(countRed == 0 && localStorage["lastRed"] == 0 && !$this.hasClass("free-ball") && countBall > 0){
-		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
-		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
-		countCurBall = parseInt(countBall) - 1;
-		$this.find(".count-ball").text(countCurBall);
-	} else if(Break == 0 && $this.hasClass("free-ball")){
-		console.log(Break);
+	} else if(countRed == 0 && localStorage["lastRed"] == 0 && !$this.hasClass("free-ball") && countBall > 0){ // Просчет количества цветных после окончания красных
+		if(parseInt($this.prev().find(".count-ball").text()) == 0){
+			$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
+			$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
+			countCurBall = parseInt(countBall) - 1;
+			$this.find(".count-ball").text(countCurBall);
+		}
+	} else if(Break == 0 && $this.hasClass("free-ball")){ // Засчитывание свободного шара только при серии в 0 очков
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		if(countRed > 0)
 			localStorage["lastRed"] = 1;
 		else
 			localStorage["lastRed"] = 0;
-	} else {
+	}/* else {
 		localStorage["lastRed"] = 0;
+	}*/
+	if(remainCalc){
+		remain = getRemain();
+		$(".remain span").text(remain);
 	}
 
-	remain = getRemain();
-	$(".remain span").text(remain);
-
 	//else if($this.has)
-	//1. когда забивается красный попробовать записать в локал сторэдж этот момент и после цветного обнулять!
-	//2. Подсчитать очки на столе(осталось на цветных)
+	//+1. когда забивается красный попробовать записать в локал сторэдж этот момент и после цветного обнулять!
+	//+2. Подсчитать очки на столе(осталось на цветных)
 	//3. Показать забитые шары игрока
 	//return false;
 }
@@ -161,5 +168,6 @@ function getFoulPoints(){
 	;
 	opponent.text(curPoints + foulPoints);
 	$.magnificPopup.close();
+	$(".next-player button").click();
 	return false;
 }
