@@ -35,6 +35,14 @@
 			</form>
 		</div>
 	</div>
+	<div class="popup2 white-popup-block mfp-hide" id="pop-frameBall">
+		<div class="popup-box">
+			<strong>Cыгран фреймбол</strong>
+			<div class="form-row">
+				<button class="closePopup">Ok</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 <!--

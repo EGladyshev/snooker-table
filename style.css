@@ -64,7 +64,8 @@ fieldset {
 }
 .container button,
 #pop-foul-points form input[type=submit],
-#new-game-form input[type=submit]{
+#new-game-form input[type=submit],
+#pop-frameBall button.closePopup{
 	background: #ffe835 none repeat scroll 0 0;
 	border: medium none;
 	/*border-radius: 20px;*/
@@ -75,6 +76,9 @@ fieldset {
 	transition: all 0.5s ease 0s;
 	cursor: pointer;
 	text-transform: uppercase;
+}
+#pop-frameBall{
+	text-align: center;
 }
 .welcome-text {
 	background: #000;
@@ -101,7 +105,8 @@ fieldset {
 /*.container button:hover,*/
 .container button:active,
 #pop-foul-points form input[type=submit]:active,
-#new-game-form input[type=submit]:active {
+#new-game-form input[type=submit]:active,
+#pop-frameBall button.closePopup:active {
 	background: #000;
 	color: #ffe835;
 }
@@ -124,14 +129,8 @@ h1 {
 	/*height: 25px;*/
 	font-size: 12px;
 }
-.left-clogged-ball {
+.left-clogged-ball, .right-clogged-ball {
 	text-align: left;
-	width: 46%;
-	display: inline-block;
-	height: 20px;
-}
-.right-clogged-ball {
-	text-align: right;
 	width: 46%;
 	display: inline-block;
 	height: 20px;

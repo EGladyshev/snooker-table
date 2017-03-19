@@ -19,7 +19,7 @@
 	<button class="cancel-action" title="кнопка в разработке">Отменить действие</button>
 </div>
 <div class="table">
-	<div class="remain">Очков на столе: <span>147</span></div>
+	<div class="remain">Очков на столе: <span data-raznica="147">147</span></div>
 
 
 	<div class="result">
@@ -33,13 +33,13 @@
 				<span class="break">Break: <em>0</em></span>
 				<div class="left-clogged-ball">
 					<ul class="clogged-balls">
-						<li class="clogged-red"><span>12</span></li>
-						<li class="clogged-yellow"><span>1</span></li>
-						<li class="clogged-green"><span>1</span></li>
-						<li class="clogged-brown"><span>1</span></li>
-						<li class="clogged-blue"><span>1</span></li>
-						<li class="clogged-rose"><span>1</span></li>
-						<li class="clogged-black"><span>1</span></li>
+						<li class="clogged-red red-ball"><span>0</span></li>
+						<li class="clogged-yellow yellow-ball"><span>0</span></li>
+						<li class="clogged-green green-ball"><span>0</span></li>
+						<li class="clogged-brown brown-ball"><span>0</span></li>
+						<li class="clogged-blue blue-ball"><span>0</span></li>
+						<li class="clogged-rose rose-ball"><span>0</span></li>
+						<li class="clogged-black black-ball"><span>0</span></li>
 					</ul>
 				</div>
 				<button>Фол</button>
@@ -55,13 +55,13 @@
 				<span class="break">Break: <em>0</em></span>
 				<div class="right-clogged-ball">
 					<ul class="clogged-balls">
-						<li class="clogged-red"><span>12</span></li>
-						<li class="clogged-yellow"><span>1</span></li>
-						<li class="clogged-green"><span>1</span></li>
-						<li class="clogged-brown"><span>1</span></li>
-						<li class="clogged-blue"><span>1</span></li>
-						<li class="clogged-rose"><span>1</span></li>
-						<li class="clogged-black"><span>1</span></li>
+						<li class="clogged-red red-ball"><span>0</span></li>
+						<li class="clogged-yellow yellow-ball"><span>0</span></li>
+						<li class="clogged-green green-ball"><span>0</span></li>
+						<li class="clogged-brown brown-ball"><span>0</span></li>
+						<li class="clogged-blue blue-ball"><span>0</span></li>
+						<li class="clogged-rose rose-ball"><span>0</span></li>
+						<li class="clogged-black black-ball"><span>0</span></li>
 					</ul>
 				</div>
 				<button>Фол</button>
