@@ -17,11 +17,11 @@
 	<div class="form-body">
 		<div class="form-row">
 			<label>Имя игрока 1: </label>
-			<input id="player1" type="text" placeholder="игрок 1" autocomplete="off">
+			<input id="player1" type="text" placeholder="игрок 1" autocomplete="off" required>
 		</div>
 		<div class="form-row">
 			<label>Имя игрока 2: </label>
-			<input id="player2" type="text" placeholder="игрок 2" autocomplete="off">
+			<input id="player2" type="text" placeholder="игрок 2" autocomplete="off" required>
 		</div>
 	</div>
 	<div class="form-row">
