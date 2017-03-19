@@ -7,13 +7,15 @@ $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
 	body
-		.on("click", ".next-player button", nextPlayer)
-		.on("click", ".balls li", getPoints)
-		.on("click", ".reset", resetFrame)
-		.on("click", ".next-frame", nextFrame)
-		.on("click", ".breakNFoul button", getPopupFoul)
-		.on("click", "#pop-foul-points form label", chooseFoulPoints)
-		.on("submit", "#pop-foul-points form", getFoulPoints)
+		.on("click", ".next-player button", nextPlayer) // Переход хода
+		.on("click", ".balls li", getPoints) // Зачисление очков
+		.on("click", ".reset", resetFrame) // Сброс
+		.on("click", ".next-frame", nextFrame) // Следующий фрейм
+		.on("click", ".breakNFoul button", getPopupFoul) // Открытие попапа с выбором количества очков
+		.on("click", "#pop-foul-points form label", chooseFoulPoints) // Выбор количества очков для фола
+		.on("submit", "#pop-foul-points form", getFoulPoints) // Засчитывание фол очков
+		.on("submit", "#new-game-form", getTable) // Получаем снукер-таблицу
+		.on("click", ".new-game", getWelcomePage) // Получаем главную страницу
 	;
 });
 function nextPlayer(){
@@ -169,5 +171,51 @@ function getFoulPoints(){
 	opponent.text(curPoints + foulPoints);
 	$.magnificPopup.close();
 	$(".next-player button").click();
+	return false;
+}
+function getTable(){
+	var player1 = $("#player1").val(),
+		player2 = $("#player2").val()
+	;
+	$.ajax({
+		url: "/ajax/getTable.php",
+		type: "POST",
+		data: {
+			player1:player1,
+			player2:player2
+		},
+		success: function(html){
+			$(".container").html(html);
+		}
+	});
+	return false;
+}
+function getTable(){
+	var player1 = $("#player1").val(),
+		player2 = $("#player2").val()
+	;
+	$.ajax({
+		url: "/ajax/getTable.php",
+		type: "POST",
+		data: {
+			player1:player1,
+			player2:player2
+		},
+		success: function(html){
+			$(".container").html(html);
+		}
+	});
+	return false;
+}
+function getWelcomePage(){
+	$.ajax({
+		url: "/ajax/getWelcomePage.php",
+		type: "POST",
+		data: {
+		},
+		success: function(html){
+			$(".container").html(html);
+		}
+	});
 	return false;
 }

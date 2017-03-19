@@ -14,6 +14,7 @@ body {
 	-ms-text-size-adjust: none;
 	/*background: #cdd0d2;*/
 	background: #fff !important;
+	font-family: "Open Sans", sans-serif;
 }
 * {
 	/*max-height: 10000px;*/
@@ -37,6 +38,7 @@ select {
 	font:100% Arial, Helvetica, sans-serif;
 	vertical-align:middle;
 	color:#000;
+	border: 0px solid;
 }
 form,
 fieldset {
@@ -58,9 +60,11 @@ fieldset {
 	text-align: center;
 	min-height: 735px;
 	background: rgba(0, 0, 0, 0) url("images/horecaplan-snooker-pocket-bewerkt.jpg") no-repeat fixed 0 0;
-	box-shadow: 0 0 60px #fff inset;
+	/*box-shadow: 0 0 60px #fff inset;*/
 }
-.container button, #pop-foul-points form input[type=submit] {
+.container button,
+#pop-foul-points form input[type=submit],
+#new-game-form input[type=submit]{
 	background: #ffe835 none repeat scroll 0 0;
 	border: medium none;
 	/*border-radius: 20px;*/
@@ -72,14 +76,32 @@ fieldset {
 	cursor: pointer;
 	text-transform: uppercase;
 }
-.cancel-action, .new-game { /*временно*/
+.welcome-text {
+	background: #000;
+	color: #fff;
+	padding: 5px;
+	font-size: 17px;
+	margin: 0px 0 13px;
+}
+.form-body{
+	background: #ffe835;
+}
+.form-row {
+	padding: 8px;
+}
+#new-game-form input[type=submit]{
+	width: 75%;
+}
+.cancel-action { /*временно*/
 	opacity: 0.5;
 }
 .top-button{
 	margin-top: 10px;
 }
 /*.container button:hover,*/
-.container button:active, #pop-foul-points form input[type=submit]:active {
+.container button:active,
+#pop-foul-points form input[type=submit]:active,
+#new-game-form input[type=submit]:active {
 	background: #000;
 	color: #ffe835;
 }
@@ -448,6 +470,28 @@ body .mfp-content{
 }
 #pop-foul-points{
 	text-align: center;
+}
+.main-menu{
+	list-style: none;
+	background: #000;
+	display: flex;
+	flex-derection: row;
+	justify-content: space-around;
+	width: 100%;
+	padding: 5px 0;
+	margin: 0;
+}
+.main-menu a{
+	color: #ffe835;
+
+}
+.manual-text{
+	background: #000;
+	color: #fff;
+	padding: 25px;
+	font-size: 15px;
+	margin: 0px 0 13px;
+	text-align: justify;
 }
 @media screen and (max-width: 400px){
 	.container{

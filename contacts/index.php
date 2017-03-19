@@ -18,7 +18,33 @@
 	<div id="wrapper">
 		<main role="main" id="main">
 			<div class="container">
-				<?require_once($_SERVER["DOCUMENT_ROOT"].'/ajax/getWelcomePage.php');?>
+				<h1>Снукер web-табло</h1>
+				<ul class="main-menu">
+					<li>
+						<a href="/">Главная</a>
+					</li>
+					<li>
+						<a href="/manual/">Инструкция</a>
+					</li>
+					<li>
+						<a href="/contacts/">Контакты</a>
+					</li>
+				</ul>
+				<div class="content-text">
+					<p class="manual-text">
+						Пользуйтесь пожалуйста сайтом snooker-table, если он Вам понравился, советуйте его своим друзьям и оставляйте отзывы на странице контакты. Свои пожелания и предложения можете писать на имейл указанный <!-- в описании к видео или --> на странице "Контакты" сайта snooker-table.
+					</p>
+					<form class="callback" action="#" method="post">
+						<div class="form-row">
+							<label>Имя: </label>
+							<input id="user-name" type="text" placeholder="Имя" autocomplete="off">
+						</div>
+						<div class="form-row">
+							<label>Текст сообщения: </label>
+							<textarea id="message" value="Текст сообщения"></textarea>
+						</div>
+					</form>
+				</div>
 			</div>
 		</main>
 	</div>
@@ -37,12 +63,3 @@
 	</div>
 </body>
 </html>
-<!--
-<div class="popup2" id="popup2">
-	<div class="popup-box" id="pop-basket">
-	</div>
-</div>
-<div id="success-basket-message" class="white-popup-block mfp-hide">
-	<p>Товар успешно добавлен в корзину.</p>
-</div>
- -->
