@@ -63,6 +63,29 @@ function getPoints(){
 			$this.find(".count-ball").text(countCurBall);
 		}
 	} else if(Break == 0 && $this.hasClass("free-ball")){ // Засчитывание свободного шара только при серии в 0 очков
+		if(countRed == 0 && parseInt($(".balls li.yellow-ball").text()) > 0){
+			points = 2;
+		} else if(parseInt($(".balls li.yellow-ball").text()) == 0
+			&& parseInt($(".balls li.green-ball").text()) > 0
+		){
+			points = 3;
+		} else if(parseInt($(".balls li.green-ball").text()) == 0
+			&& parseInt($(".balls li.brown-ball").text()) > 0
+		){
+			points = 4;
+		} else if(parseInt($(".balls li.brown-ball").text()) == 0
+			&& parseInt($(".balls li.blue-ball").text()) > 0
+		){
+			points = 5;
+		} else if(parseInt($(".balls li.blue-ball").text()) == 0
+			&& parseInt($(".balls li.rose-ball").text()) > 0
+		){
+			points = 6;
+		} else if(parseInt($(".balls li.rose-ball").text()) == 0
+			&& parseInt($(".balls li.black-ball").text()) > 0
+		){
+			points = 7;
+		}
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		if(countRed > 0)
