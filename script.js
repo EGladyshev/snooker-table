@@ -10,6 +10,7 @@
 $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
+	localStorage["lastBlack"] = 0;
 	body
 		.on("click", ".next-player button", nextPlayer) // Переход хода
 		.on("click", ".balls li", getPoints) // Зачисление очков
@@ -20,7 +21,7 @@ $(document).ready(function(){
 		.on("submit", "#pop-foul-points form", getFoulPoints) // Засчитывание фол очков
 		.on("submit", "#new-game-form", getTable) // Получаем снукер-таблицу
 		.on("click", ".new-game", getWelcomePage) // Получаем главную страницу
-		.on("click", "#pop-frameBall button", closeFrameBallPopup) // Закрытие попапа фреймбола
+		.on("click", "#pop-message button", closeMessagePopup) // Закрытие попапа фреймбола
 	;
 });
 function nextPlayer(){
@@ -80,7 +81,7 @@ function getPoints(){
 			$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 			$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
 		}
-	} else if(Break == 0 && $this.hasClass("free-ball")){ // Засчитывание свободного шара только при серии в 0 очков
+	} else if(Break == 0 && $this.hasClass("free-ball") && localStorage["lastBlack"] == 0){ // Засчитывание свободного шара только при серии в 0 очков, но не при розыгрыше на черном
 		if(countRed == 0 && parseInt($(".balls li.yellow-ball").text()) > 0){
 			points = 2;
 		} else if(parseInt($(".balls li.yellow-ball").text()) == 0
@@ -120,9 +121,10 @@ function getPoints(){
 	newRaznica = getFrameBall();
 	if(raznica > 0 && newRaznica < 0){ // Определяем сыгран ли фреймбол
 		//alert("Cыгран фреймбол");
+		$("#pop-message strong").text("Cыгран фреймбол");
 		$.magnificPopup.open({
 			items: {
-				src: '#pop-frameBall'
+				src: '#pop-message'
 			},
 			removalDelay: 300,
 			mainClass: 'mfp-fade'
@@ -145,13 +147,25 @@ function nextFrame(){
 	;
 	if(player1Points > player2Points){
 		$(".player-left .result-frame").text(player1Frames + 1);
+		resetFrame();
 	} else if(player1Points < player2Points){
 		$(".player-right .result-frame").text(player2Frames + 1);
+		resetFrame();
 	} else { // сброс, переигровка на черном
-		console.log("сброс, переигровка на черном");
+		//console.log("сброс, переигровка на черном");
+		$("#pop-message strong").text("Cброс, переигровка на черном");
+		$.magnificPopup.open({
+			items: {
+				src: '#pop-message'
+			},
+			removalDelay: 300,
+			mainClass: 'mfp-fade'
+		});
+		$("body").find(".balls li .count-ball").text(0);
+		$("body").find(".balls li.black-ball .count-ball").text(1);
+		$("body").find(".remain span").text(7);
+		localStorage["lastBlack"] = 1;
 	}
-
-	resetFrame();
 }
 function getRemain(countRed){
 	// Закончил здесь, на просчете оставшихся очков на цветных
@@ -297,6 +311,6 @@ function getFrameBall(){
 	$(".remain span").data("raznica", raznica);
 	return raznica;
 }
-function closeFrameBallPopup(){
+function closeMessagePopup(){
 	$.magnificPopup.close();
 }

@@ -1,0 +1,2 @@
+<?
+$documentRoot = "/snooker";

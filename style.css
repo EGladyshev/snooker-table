@@ -65,7 +65,7 @@ fieldset {
 .container button,
 #pop-foul-points form input[type=submit],
 #new-game-form input[type=submit],
-#pop-frameBall button.closePopup{
+#pop-message button.closePopup{
 	background: #ffe835 none repeat scroll 0 0;
 	border: medium none;
 	/*border-radius: 20px;*/
@@ -77,7 +77,7 @@ fieldset {
 	cursor: pointer;
 	text-transform: uppercase;
 }
-#pop-frameBall{
+#pop-message{
 	text-align: center;
 }
 .welcome-text {
@@ -106,7 +106,7 @@ fieldset {
 .container button:active,
 #pop-foul-points form input[type=submit]:active,
 #new-game-form input[type=submit]:active,
-#pop-frameBall button.closePopup:active {
+#pop-message button.closePopup:active {
 	background: #000;
 	color: #ffe835;
 }
