@@ -94,7 +94,7 @@ fieldset {
 	padding: 8px;
 }
 #new-game-form input[type=submit]{
-	width: 75%;
+	width: 85%; /*75*/
 }
 .cancel-action { /*временно*/
 	opacity: 0.5;
@@ -122,8 +122,13 @@ h1 {
 	background: #000 none repeat scroll 0 0;
 	color: #fff;
 	margin: 0 auto;
-	width: 50%;
+	width: 75%; /*50%*/
 	padding: 4px 5px;
+}
+.remain input {
+	width: 73px;
+	background: #000;
+	color: #fff;
 }
 .clogged-balls {
 	/*height: 25px;*/
@@ -282,6 +287,12 @@ h1 {
 	background: #ffe835 none repeat scroll 0 0;
 	margin: 2px 5px 4px;
 	padding: 0 5px;
+}
+.breakNFoul input[name="stopwatchShotTime"] {
+	width: 51px;
+	font-size: 19px;
+	background: #000;
+	color: #fff;
 }
 .next-player {
 	margin: 0 auto;

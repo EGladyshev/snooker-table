@@ -7,10 +7,15 @@
 //+6. Подсчитать очки на столе(осталось на цветных)
 //+7. Показать забитые шары игрока
 //+8. !!! по зачету и просчету очков настоле осталось, когда на столе лищь цветные, прописать!
+var base = 60;
+var clocktimer,dateObj,dh,dm,ds,ms;
+var readout='';
+var h=1,m=1,tm=1,s=0,ts=0,ms=0,init=0;
 $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
 	localStorage["lastBlack"] = 0;
+
 	body
 		.on("click", ".next-player button", nextPlayer) // Переход хода
 		.on("click", ".balls li", getPoints) // Зачисление очков
@@ -44,7 +49,7 @@ function getPoints(){
 		remainCalc = true,
 		curPlayer = $(".player-block.active .player").text(),
 		curPushedBall = parseInt($(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text()),
-		raznica = parseInt($(".remain span").data("raznica")),
+		raznica = parseInt($(".remain .remainPoints").data("raznica")),
 		newRaznica = 0;
 	;
 	//console.log(curPlayer);
@@ -116,10 +121,11 @@ function getPoints(){
 	}*/
 	if(remainCalc){
 		remain = getRemain();
-		$(".remain span").text(remain);
+		$(".remain .remainPoints").text(remain);
 	}
 	newRaznica = getFrameBall();
-	if(raznica > 0 && newRaznica < 0){ // Определяем сыгран ли фреймбол
+	//console.log("newRaznica: "+newRaznica);
+	if(newRaznica < 0 /*&& newRaznica < 0*/){ // Определяем сыгран ли фреймбол
 		//alert("Cыгран фреймбол");
 		$("#pop-message strong").text("Cыгран фреймбол");
 		$.magnificPopup.open({
@@ -136,8 +142,10 @@ function resetFrame(){
 	$(".player-block .result-points").text(0); // обнуляем очки
 	$(".red-ball .count-ball").text(15); // Заполняем количество шаров на столе
 	$(".yellow-ball .count-ball, .green-ball .count-ball, .brown-ball .count-ball, .blue-ball .count-ball, .rose-ball .count-ball, .black-ball .count-ball").text(1);
-	$(".remain span").text(147);
+	$(".remain .remainPoints").text(147);
 	$("body").find(".clogged-balls li").hide().find("span").text(0);
+	ClearСlockFrame();
+	StartStopFrame();
 }
 function nextFrame(){
 	var player1Points = parseInt($(".player-left .result-points").text()),
@@ -163,7 +171,7 @@ function nextFrame(){
 		});
 		$("body").find(".balls li .count-ball").text(0);
 		$("body").find(".balls li.black-ball .count-ball").text(1);
-		$("body").find(".remain span").text(7);
+		$("body").find(".remain .remainPoints").text(7);
 		localStorage["lastBlack"] = 1;
 	}
 }
@@ -247,35 +255,7 @@ function getTable(){
 		},
 		success: function(html){
 			$(".container").html(html);
-		}
-	});
-	return false;
-}
-function getTable(){
-	var player1 = $("#player1").val(),
-		player2 = $("#player2").val()
-	;
-	$.ajax({
-		url: "/ajax/getTable.php",
-		type: "POST",
-		data: {
-			player1:player1,
-			player2:player2
-		},
-		success: function(html){
-			$(".container").html(html);
-			/*localStorage[player1] = [];
-			localStorage[player1]["balls"] = [];
-			localStorage[player2] = [];
-			localStorage[player2]["balls"] = [];
-			$("body").find(".balls li").each(function(){
-				var $this = $(this);
-				console.log($this.attr("class"));
-				console.log(player1);
-				console.log(localStorage[player1]);
-				localStorage[player1]["balls"]["$this.attr('class')"] = 0;
-				localStorage[player2]["balls"]["$this.attr('class')"] = 0;
-			});*/
+			StartStopFrame();
 		}
 	});
 	return false;
@@ -294,23 +274,85 @@ function getWelcomePage(){
 }
 
 function getFrameBall(){
-	var remain = parseInt($(".remain span").text()),
+	var remain = parseInt($(".remain .remainPoints").text()),
 		player1Points = parseInt($(".player-left .result-points").text()),
 		player2Points = parseInt($(".player-right .result-points").text()),
-		maxPoints = 0,
-		raznica = 0
+		maxPoints = 0, // Очки побеждающего
+		raznica = 0, // Очки до фреймбола
+		potencial = 0, // очки на столе + очки отстающего
+		rest = 0 // очки отстающего
 	;
 	if(player1Points > player2Points){
 		maxPoints = player1Points;
+		rest = player2Points;
 	} else if(player1Points < player2Points){
 		maxPoints = player2Points;
+		rest = player1Points;
 	} else {
 		maxPoints = player1Points;
+		rest = player2Points;
 	}
-	raznica = remain - maxPoints;
-	$(".remain span").data("raznica", raznica);
+	potencial = remain + rest;
+	//raznica = remain - maxPoints;
+	raznica = potencial - maxPoints;
+	//console.log(potencial);
+	//console.log(raznica);
+	$(".remain .remainPoints").data("raznica", raznica);
 	return raznica;
 }
 function closeMessagePopup(){
 	$.magnificPopup.close();
+}
+//функция для очистки поля
+function ClearСlockFrame() {
+	clearTimeout(clocktimer);
+	h=1;m=1;tm=1;s=0;ts=0;ms=0;
+	init=0;
+	readout='00:00:00.00';
+	//document.stopwatch.value=readout;
+	$("body").find("input[name=stopwatch]").val(readout);
+}
+function StartTIMEFrame() {
+	var cdateObj = new Date();
+	var t = (cdateObj.getTime() - dateObj.getTime())-(s*1000);
+	if (t>999) { s++; }
+	if (s>=(m*base)) {
+		ts=0;
+		m++;
+	} else {
+		ts=parseInt((ms/100)+s);
+		if(ts>=base) { ts=ts-((m-1)*base); }
+	}
+	if (m>(h*base)) {
+		tm=1;
+		h++;
+	} else {
+		tm=parseInt((ms/100)+m);
+		if(tm>=base) { tm=tm-((h-1)*base); }
+	}
+	ms = Math.round(t/10);
+	if (ms>99) {ms=0;}
+	if (ms==0) {ms='00';}
+	if (ms>0&&ms<=9) { ms = '0'+ms; }
+	if (ts>0) { ds = ts; if (ts<10) { ds = '0'+ts; }} else { ds = '00'; }
+	dm=tm-1;
+	if (dm>0) { if (dm<10) { dm = '0'+dm; }} else { dm = '00'; }
+	dh=h-1;
+	if (dh>0) { if (dh<10) { dh = '0'+dh; }} else { dh = '00'; }
+	readout = dh + ':' + dm + ':' + ds + '.' + ms;
+	//document.stopwatch.value = readout;
+	$("body").find("input[name=stopwatch]").val(readout);
+	clocktimer = setTimeout("StartTIMEFrame()",1);
+}
+//Функция запуска и остановки
+function StartStopFrame() {
+	if (init==0){
+		ClearСlockFrame();
+		dateObj = new Date();
+		StartTIMEFrame();
+		init=1;
+	} else {
+		clearTimeout(clocktimer);
+		init=0;
+	}
 }

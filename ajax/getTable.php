@@ -19,9 +19,12 @@
 	<button class="cancel-action" title="кнопка в разработке">Отменить действие</button>
 </div>
 <div class="table">
-	<div class="remain">Очков на столе: <span data-raznica="147">147</span></div>
-
-
+	<div class="remain">
+		<!-- <span class="frameTime">00:00:00</span> -->
+		<input name="stopwatch" size="8" value="00:00:00">
+		Очков на столе:
+		<span class="remainPoints" data-raznica="147">147</span>
+	</div>
 	<div class="result">
 		<div class="player-block player-left active">
 			<div class="player-points">
@@ -42,6 +45,7 @@
 						<li class="clogged-black black-ball"><span>0</span></li>
 					</ul>
 				</div>
+				<!-- <input name="stopwatchShotTime" size="5" value="00:00"> -->
 				<button>Фол</button>
 			</div>
 		</div>
@@ -64,6 +68,7 @@
 						<li class="clogged-black black-ball"><span>0</span></li>
 					</ul>
 				</div>
+				<!-- <input name="stopwatchShotTime" size="5" value="00:00"> -->
 				<button>Фол</button>
 			</div>
 		</div>
