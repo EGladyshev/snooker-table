@@ -15,7 +15,7 @@ $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
 	localStorage["lastBlack"] = 0;
-
+	localStorage["lastFreeBall"] = 0;
 	body
 		.on("click", ".next-player button", nextPlayer) // Переход хода
 		.on("click", ".balls li", getPoints) // Зачисление очков
@@ -53,12 +53,13 @@ function getPoints(){
 		newRaznica = 0;
 	;
 	//console.log(curPlayer);
-	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0/*  && localStorage["lastRed"] == 0*/){ // Просчет красных
+	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0 && localStorage["lastFreeBall"] == 0/*  && localStorage["lastRed"] == 0*/){ // Просчет красных
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		countRed = parseInt(countBall) - 1;
 		$this.find(".count-ball").text(countRed);
 		localStorage["lastRed"] = 1;
+		localStorage["lastFreeBall"] = 0;
 		//localStorage[curPlayer]["balls"][$this.attr("class")] = localStorage[curPlayer]["balls"][$this.attr("class")] + 1;
 		$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 		$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
@@ -76,6 +77,7 @@ function getPoints(){
 		localStorage["lastRed"] = 0;
 		$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 		$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
+		localStorage["lastFreeBall"] = 0;
 		//return false;
 	} else if(countRed == 0 && localStorage["lastRed"] == 0 && !$this.hasClass("free-ball") && countBall > 0){ // Просчет количества цветных после окончания красных
 		if(parseInt($this.prev().find(".count-ball").text()) == 0){
@@ -85,6 +87,7 @@ function getPoints(){
 			$this.find(".count-ball").text(countCurBall);
 			$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 			$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
+			//localStorage["lastFreeBall"] = 0;
 		}
 	} else if(Break == 0 && $this.hasClass("free-ball") && localStorage["lastBlack"] == 0){ // Засчитывание свободного шара только при серии в 0 очков, но не при розыгрыше на черном
 		if(countRed == 0 && parseInt($(".balls li.yellow-ball").text()) > 0){
@@ -112,10 +115,13 @@ function getPoints(){
 		}
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
-		if(countRed > 0)
+		if(countRed > 0){
 			localStorage["lastRed"] = 1;
-		else
+			localStorage["lastFreeBall"] = 1;
+		} else {
 			localStorage["lastRed"] = 0;
+			localStorage["lastFreeBall"] = 0;
+		}
 	}/* else {
 		localStorage["lastRed"] = 0;
 	}*/
@@ -125,7 +131,7 @@ function getPoints(){
 	}
 	newRaznica = getFrameBall();
 	//console.log("newRaznica: "+newRaznica);
-	if(newRaznica < 0 /*&& newRaznica < 0*/){ // Определяем сыгран ли фреймбол
+	if(newRaznica < 0 && raznica > 0 /*&& newRaznica < 0*/){ // Определяем сыгран ли фреймбол
 		//alert("Cыгран фреймбол");
 		$("#pop-message strong").text("Cыгран фреймбол");
 		$.magnificPopup.open({

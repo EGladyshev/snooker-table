@@ -11,7 +11,7 @@
 	</li> -->
 </ul>
 <div class="top-button">
-	<button class="new-game" title="кнопка в разработке">Новая игра</button>
+	<button class="new-game">Новая игра</button>
 	<button class="next-frame">Следующий фрейм</button>
 </div>
 <div class="top-button">
