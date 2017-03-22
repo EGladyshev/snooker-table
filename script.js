@@ -141,7 +141,7 @@ function resetFrame(){
 	$(".player-block .breakNFoul .break em").text(0); // обнуляем брейк
 	$(".player-block .result-points").text(0); // обнуляем очки
 	$(".red-ball .count-ball").text(15); // Заполняем количество шаров на столе
-	$(".yellow-ball .count-ball, .green-ball .count-ball, .brown-ball .count-ball, .blue-ball .count-ball, .rose-ball .count-ball, .black-ball .count-ball").text(1);
+	$(".yellow-ball .count-ball, .green-ball .count-ball, .brown-ball .count-ball, .blue-ball .count-ball, .rose-ball .count-ball, .black-ball .count-ball, .free-ball .count-ball").text(1);
 	$(".remain .remainPoints").text(147);
 	$("body").find(".clogged-balls li").hide().find("span").text(0);
 	ClearСlockFrame();
