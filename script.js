@@ -7,7 +7,8 @@
 // +6. Подсчитать очки на столе(осталось на цветных)
 // +7. Показать забитые шары игрока
 // +8. !!! по зачету и просчету очков настоле осталось, когда на столе лищь цветные, прописать!
-// 9 учитывать забитые красные при фолах(уменьшать их)
+// 9. учитывать забитые красные при фолах(уменьшать их)
+// 10. Кнопка "Отменить действие" - запоминать состояние таблицы после каждого хода.
 var base = 60;
 var clocktimer,dateObj,dh,dm,ds,ms;
 var readout='';
@@ -16,7 +17,7 @@ $(document).ready(function(){
 	var body = $('body');
 	localStorage["lastRed"] = 0;
 	localStorage["lastBlack"] = 0;
-	localStorage["lastFreeBall"] = 0;
+
 	body
 		.on("click", ".next-player button", nextPlayer) // Переход хода
 		.on("click", ".balls li", getPoints) // Зачисление очков
@@ -54,13 +55,12 @@ function getPoints(){
 		newRaznica = 0;
 	;
 	//console.log(curPlayer);
-	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0 && localStorage["lastFreeBall"] == 0/*  && localStorage["lastRed"] == 0*/){ // Просчет красных
+	if($this.hasClass("red-ball") && parseInt($this.find(".count-ball").text()) > 0/*  && localStorage["lastRed"] == 0*/){ // Просчет красных
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
 		countRed = parseInt(countBall) - 1;
 		$this.find(".count-ball").text(countRed);
 		localStorage["lastRed"] = 1;
-		localStorage["lastFreeBall"] = 0;
 		//localStorage[curPlayer]["balls"][$this.attr("class")] = localStorage[curPlayer]["balls"][$this.attr("class")] + 1;
 		$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 		$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
@@ -78,7 +78,6 @@ function getPoints(){
 		localStorage["lastRed"] = 0;
 		$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 		$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
-		localStorage["lastFreeBall"] = 0;
 		//return false;
 	} else if(countRed == 0 && localStorage["lastRed"] == 0 && !$this.hasClass("free-ball") && countBall > 0){ // Просчет количества цветных после окончания красных
 		if(parseInt($this.prev().find(".count-ball").text()) == 0){
@@ -88,7 +87,6 @@ function getPoints(){
 			$this.find(".count-ball").text(countCurBall);
 			$(".player-block.active .clogged-balls ."+$this.attr("class")+" span").text(curPushedBall + 1);
 			$(".player-block.active .clogged-balls ."+$this.attr("class")).css("display", "inline-block");
-			//localStorage["lastFreeBall"] = 0;
 		}
 	} else if(Break == 0 && $this.hasClass("free-ball") && localStorage["lastBlack"] == 0){ // Засчитывание свободного шара только при серии в 0 очков, но не при розыгрыше на черном
 		if(countRed == 0 && parseInt($(".balls li.yellow-ball").text()) > 0){
@@ -116,13 +114,10 @@ function getPoints(){
 		}
 		$(".player-block.active .result-points").text(parseInt(curPoint) + parseInt(points));
 		$(".player-block.active .breakNFoul .break em").text(parseInt(Break) + parseInt(points));
-		if(countRed > 0){
+		if(countRed > 0)
 			localStorage["lastRed"] = 1;
-			localStorage["lastFreeBall"] = 1;
-		} else {
+		else
 			localStorage["lastRed"] = 0;
-			localStorage["lastFreeBall"] = 0;
-		}
 	}/* else {
 		localStorage["lastRed"] = 0;
 	}*/
@@ -132,7 +127,7 @@ function getPoints(){
 	}
 	newRaznica = getFrameBall();
 	//console.log("newRaznica: "+newRaznica);
-	if(newRaznica < 0 && raznica > 0 /*&& newRaznica < 0*/){ // Определяем сыгран ли фреймбол
+	if(newRaznica < 0 /*&& newRaznica < 0*/){ // Определяем сыгран ли фреймбол
 		//alert("Cыгран фреймбол");
 		$("#pop-message strong").text("Cыгран фреймбол");
 		$.magnificPopup.open({
@@ -148,7 +143,7 @@ function resetFrame(){
 	$(".player-block .breakNFoul .break em").text(0); // обнуляем брейк
 	$(".player-block .result-points").text(0); // обнуляем очки
 	$(".red-ball .count-ball").text(15); // Заполняем количество шаров на столе
-	$(".yellow-ball .count-ball, .green-ball .count-ball, .brown-ball .count-ball, .blue-ball .count-ball, .rose-ball .count-ball, .black-ball .count-ball, .free-ball .count-ball").text(1);
+	$(".yellow-ball .count-ball, .green-ball .count-ball, .brown-ball .count-ball, .blue-ball .count-ball, .rose-ball .count-ball, .black-ball .count-ball").text(1);
 	$(".remain .remainPoints").text(147);
 	$("body").find(".clogged-balls li").hide().find("span").text(0);
 	ClearСlockFrame();
