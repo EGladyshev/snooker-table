@@ -7,9 +7,9 @@
 			<strong>Сколько очков фол?</strong>
 			<form action="" method="post">
 				<label class="active" for="foul4points"><input id="foul4points" name="foul" type="radio" value="4" checked>4 очка</label>
-				<label for="foul5points"><input id="foul5points" name="foul" type="radio" value="5">5 очка</label>
-				<label for="foul6points"><input id="foul6points" name="foul" type="radio" value="6">6 очка</label>
-				<label for="foul7points"><input id="foul7points" name="foul" type="radio" value="7">7 очка</label>
+				<label for="foul5points"><input id="foul5points" name="foul" type="radio" value="5">5 очков</label>
+				<label for="foul6points"><input id="foul6points" name="foul" type="radio" value="6">6 очков</label>
+				<label for="foul7points"><input id="foul7points" name="foul" type="radio" value="7">7 очков</label>
 				<input type="submit" value="Выбрать">
 			</form>
 		</div>
