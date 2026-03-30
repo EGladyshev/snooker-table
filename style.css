@@ -59,7 +59,8 @@ fieldset {
 	width: 412px; /*500px*/
 	text-align: center;
 	min-height: 735px;
-	background: rgba(0, 0, 0, 0) url("images/horecaplan-snooker-pocket-bewerkt.jpg") no-repeat fixed 0 0;
+	background: rgba(0, 0, 0, 0) url("images/background.png") no-repeat 0 0;
+	background-size: cover;
 	/*box-shadow: 0 0 60px #fff inset;*/
 }
 .container button,
@@ -353,37 +354,47 @@ h1 {
 }
 .balls li {
 	display: inline-block;
-	background: black;
+	/*background: black;*/
 	margin: 0 0 10px;
 	border-radius: 50%;
-	height: 90px; /*50px*/
-	width: 90px; /*50px*/
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #5cabff, #000) repeat scroll 0 0;
+	height: 96px; /*50px*/
+	width: 96px; /*50px*/
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #5cabff, #000) repeat scroll 0 0;*/
 	cursor: pointer;
+
+	background-size: 103px 103px;
 }
 .balls li.red-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #d60b0f, #000) repeat scroll 0 0;
+	background-image: url(images/red_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #d60b0f, #000) repeat scroll 0 0;*/
 }
 .balls li.yellow-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #FEB101, #000) repeat scroll 0 0;
+	background-image: url(images/yellow_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #FEB101, #000) repeat scroll 0 0;*/
 }
 .balls li.green-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #056c6b, #000) repeat scroll 0 0;
+	background-image: url(images/green_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #056c6b, #000) repeat scroll 0 0;*/
 }
 .balls li.brown-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #955029, #000) repeat scroll 0 0;
+	background-image: url(images/brown_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #955029, #000) repeat scroll 0 0;*/
 }
 .balls li.blue-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #0168D1, #000) repeat scroll 0 0;
+	background-image: url(images/blue_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #0168D1, #000) repeat scroll 0 0;*/
 }
 .balls li.rose-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #FE8FA0, #000) repeat scroll 0 0;
+	background-image: url(images/pink_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #FE8FA0, #000) repeat scroll 0 0;*/
 }
 .balls li.black-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #000, #000) repeat scroll 0 0;
+	background-image: url(images/black_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #000, #000) repeat scroll 0 0;*/
 }
 .balls li.free-ball{
-	background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #FA3DE4, #000) repeat scroll 0 0;
+	background-image: url(images/red_ball.webp);
+	/*background: rgba(0, 0, 0, 0) radial-gradient(circle at 16px 10px , #FA3DE4, #000) repeat scroll 0 0;*/
 }
 /*.balls li:before {
 	color: #fff;
